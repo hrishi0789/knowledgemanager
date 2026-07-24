@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     gcc \
     g++ \
+    supervisor \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -32,3 +33,5 @@ RUN mkdir -p /app/data/chroma /app/data/documents
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONPATH=/app
+
+CMD ["supervisord", "-c", "/app/supervisord.conf"]
